@@ -13,7 +13,7 @@ local lib = mods['adamant-Modpack_Lib']
 config = chalk.auto('config.lua')
 public.config = config
 
-local backup, revert = lib.createBackupSystem()
+local _, revert = lib.createBackupSystem()
 
 -- =============================================================================
 -- MODULE DEFINITION
@@ -37,7 +37,7 @@ local function apply()
 end
 
 local function registerHooks()
-    modutil.mod.Path.Context.Wrap("KillHero", function(base, victim, triggerArgs)
+    modutil.mod.Path.Context.Wrap("KillHero", function(_, _, _)
         modutil.mod.Path.Wrap("LoadMap", function(base, argTable)
             if not lib.isEnabled(config) then
                 base(argTable)
